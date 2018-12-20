@@ -11,6 +11,13 @@ class KnowledgeExtractor:
 
 	def extract_entities(self):
 		entity_data = self.comprehend.detect_entities(Text=self.text, LanguageCode='en')
-		return json.dumps(entity_data, sort_keys=True, indent=4)
+		return entity_data
 
-	
+	def extract_keywords(self):
+		keyword_data = comprehend.detect_key_phrases(Text=text, LanguageCode='en')
+		return keyword_data
+
+	def determine_sentiment(self):
+		sentiment_data = comprehend.detect_sentiment(Text=text, LanguageCode='en')
+		return sentiment_data
+		
