@@ -35,7 +35,15 @@ class KnowledgeExtractor:
 			"sentiment_data": self.determine_sentiment
 		}
 
+	def response(self):
 		return self.response
 
 if __name__ == "__main__":
-	pass
+	sample_text = '''
+		Nowadays Artificial Intelligence in India is also making a change in IT industry. It is an area of Machine Learning algorithms having multiple layers for feature extraction and transformation of each successive layer using output from previous layer as an input.
+		Deep Learning and Data science includes learning of deep structured and unstructured representation of data and allow to build a solution optimized from algorithm to solve Machine Learning problems. It is fastest-growing field in machine learning using deep neural networks to abstract data such as images, sound and text. Thus Deep Learning has become growing trend in Artificial Intelligence to abstract better results when data is large and complex. Deep Learning consists of an artificial neural network which refers to the depth of the network. Neural networks are inspired by structure of cerebral cortex. Perceptron is the basic model of neural network.
+	'''
+
+	extractor = KnowledgeExtractor(sample_text)
+	response = extractor.response()
+	print (json.dumps(response, sort_keys=True, indent=4))
