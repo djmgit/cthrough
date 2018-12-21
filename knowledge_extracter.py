@@ -21,21 +21,21 @@ class KnowledgeExtractor:
 		return entity_data
 
 	def extract_keywords(self):
-		keyword_data = comprehend.detect_key_phrases(Text=self.text, LanguageCode='en')
+		keyword_data = self.comprehend.detect_key_phrases(Text=self.text, LanguageCode='en')
 		return keyword_data
 
 	def determine_sentiment(self):
-		sentiment_data = comprehend.detect_sentiment(Text=self.text, LanguageCode='en')
+		sentiment_data = self.comprehend.detect_sentiment(Text=self.text, LanguageCode='en')
 		return sentiment_data
 
 	def extract_knowledge(self):
 		self.response = {
-			"entity_data": self.extract_entities,
-			"keyword_data": self.extract_keywords,
-			"sentiment_data": self.determine_sentiment
+			"entity_data": self.extract_entities(),
+			"keyword_data": self.extract_keywords(),
+			"sentiment_data": self.determine_sentiment()
 		}
 
-	def response(self):
+	def get_response(self):
 		return self.response
 
 if __name__ == "__main__":
@@ -45,5 +45,5 @@ if __name__ == "__main__":
 	'''
 
 	extractor = KnowledgeExtractor(sample_text)
-	response = extractor.response()
+	response = extractor.get_response()
 	print (json.dumps(response, sort_keys=True, indent=4))
