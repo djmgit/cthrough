@@ -30,7 +30,22 @@ class SimLib:
 		# remove stopwords
 		word_list = [w if w not in stopwords]
 
-		return word_list
+		# count occurences
+		count_vect = {}
+		for word in word_list:
+			count_vect[word] = count_vect.get(word, 0) += 1
+
+		return count_vect
+
+	def get_cos_vector(self, all_words, word_vect):
+		vector = []
+		index = 0
+
+		for word in all_words:
+			vector[index] = word_vect.get(word, 0)
+			index += 1
+
+		return vector
 
 	def findsim(self):
 		kextractor = KnowledgeExtractor()
@@ -43,10 +58,13 @@ class SimLib:
 		word_vect_doc1 = self.get_word_vector(resource1)
 		word_vect_doc2 = self.get_word_vector(resource2)
 
-		all_words = word_vect_doc1 + word_vect_doc2
+		all_words = word_vect_doc1.keys() + word_vect_doc2.keys()
 		all_words = list(set(all_words))
 
-		count_vect1 = self.get_count_vects(all_words, doc1)
+		cos_vect1 = self.get_cos_vector(all_words, word_vect_doc1)
+		cos_vect2 = self.get_cos_vector(all_words, word_vect_doc2)
+
+
 
 
 
