@@ -87,12 +87,12 @@ if __name__ == "__main__":
 	doc5 = {"name":"test5.txt", "content": "I do not like fast food. I like to eat home made food more."}
 
 	list_of_docs = [doc1, doc2, doc3, doc4, doc5]
-	#print (csim.find_sim_between_two(doc1['content'], doc2['content']))
+	print (csim.find_sim_between_two(doc1['content'], doc2['content']))
 	#print ("\n")
 	#print (csim.find_similar_docs(doc1, [doc2, doc3, doc4, doc5], 0.5))
 	#print ("\n")
 	#print (csim.find_similarity_pairs(list_of_docs))
 	#print ("\n")
-	print (csim.cluster_docs(list_of_docs, 0.4))
+	#print (csim.cluster_docs(list_of_docs, 0.4))
 
 

@@ -1,8 +1,10 @@
 from knowledge_extractor import KnowledgeExtractor
 from stopwords import stopwords
+import nltk
 
 class SimLib:
 	def __init__(self, doc1="", doc2=""):
+		self.porter = nltk.PorterStemmer()
 		if doc1 and doc2:
 			self.doc1 = doc1
 			self.doc2 = doc2
@@ -25,7 +27,7 @@ class SimLib:
 			# keyword might consists of more than one word
 			# we need to split it and add it to list as separate words
 			keywords = keyword.split()
-			keywords = [k.lower() for k in keywords]
+			keywords = [self.porter.stem(k.lower()) for k in keywords]
 			word_list += keywords
 
 		# extract entities also
@@ -35,7 +37,7 @@ class SimLib:
 
 			# same as keywords, split if more that one word
 			entities = entity.split()
-			entities = [e.lower() for e in entities]
+			entities = [self.porter.stem(e.lower()) for e in entities]
 			word_list += entities
 
 		# remove stopwords
