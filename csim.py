@@ -52,12 +52,12 @@ class Csim:
 				doc1 = list_of_docs[index_i]
 				doc2 = list_of_docs[index_j]
 				score = self.find_sim_between_two(doc1.get("content"), doc2.get("content"))
-				print (doc1.get("name"), doc2.get("name"), score)
+				#print (doc1.get("name"), doc2.get("name"), score)
 
 				doc1_cluster_id = self.get_cluster_id(clusters, doc1.get("name"))
 				doc2_cluster_id = self.get_cluster_id(clusters, doc2.get("name"))
 
-				print (doc1_cluster_id, doc2_cluster_id)
+				#print (doc1_cluster_id, doc2_cluster_id)
 
 				if score > threshold:
 					if doc1_cluster_id == None and doc2_cluster_id == None:
@@ -66,6 +66,14 @@ class Csim:
 						clusters[doc2_cluster_id].append(doc1.get("name"))
 					elif doc1_cluster_id != None and doc2_cluster_id == None:
 						clusters[doc1_cluster_id].append(doc2.get("name"))
+					else:
+						clusters[doc1_cluster_id] += clusters[doc2_cluster_id]
+						del clusters[doc2_cluster_id]
+				else:
+					if doc1_cluster_id == None:
+						clusters.append([doc1.get("name")])
+					if doc2_cluster_id == None:
+						clusters.append([doc2.get("name")])
 
 		return clusters
 
@@ -85,6 +93,6 @@ if __name__ == "__main__":
 	#print ("\n")
 	#print (csim.find_similarity_pairs(list_of_docs))
 	#print ("\n")
-	print (csim.cluster_docs(list_of_docs))
+	print (csim.cluster_docs(list_of_docs, 0.4))
 
 
