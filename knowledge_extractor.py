@@ -44,7 +44,7 @@ if __name__ == "__main__":
 		#Deep Learning and Data science includes learning of deep structured and unstructured representation of data and allow to build a solution optimized from algorithm to solve Machine Learning problems. It is fastest-growing field in machine learning using deep neural networks to abstract data such as images, sound and text. Thus Deep Learning has become growing trend in Artificial Intelligence to abstract better results when data is large and complex. Deep Learning consists of an artificial neural network which refers to the depth of the network. Neural networks are inspired by structure of cerebral cortex. Perceptron is the basic model of neural network.
 	#'''
 
-	sample_text = "I live in India. My parents are also from India. I like to eat burgers. Burger King is where you get burgers."
+	sample_text = "I am from India. I have come from west bengal, kolkata"
 
 	extractor = KnowledgeExtractor(sample_text)
 	response = extractor.get_response()

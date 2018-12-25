@@ -27,6 +27,15 @@ class SimLib:
 			keywords = keyword.split()
 			word_list += keywords
 
+		# extract entities also
+		entity_data = resource.get('entity_data').get('Entities')
+		for entity_obj in entity_data:
+			entity = entity_obj['Text']
+
+			# same as keywords, split if more that one word
+			entities = entity.split()
+			word_list += entities
+
 		# remove stopwords
 		word_list = [w for w in word_list if w not in stopwords]
 
