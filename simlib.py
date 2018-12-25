@@ -47,6 +47,13 @@ class SimLib:
 
 		return vector
 
+	def get_mod(self, vect):
+		sum_square = sum([v*v for v in vect])
+		return float(sum_square**0.5)
+
+	def get_cos_sim(self, vect1, vect2):
+		# calculate 
+
 	def findsim(self):
 		kextractor = KnowledgeExtractor()
 		kextractor.set_text_and_extract(doc1)
@@ -63,6 +70,8 @@ class SimLib:
 
 		cos_vect1 = self.get_cos_vector(all_words, word_vect_doc1)
 		cos_vect2 = self.get_cos_vector(all_words, word_vect_doc2)
+
+		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
 
 
 
