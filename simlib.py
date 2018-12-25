@@ -83,8 +83,8 @@ class SimLib:
 		word_vect_doc1 = self.get_word_vector(resource1)
 		word_vect_doc2 = self.get_word_vector(resource2)
 
-		#print (word_vect_doc1)
-		#print (word_vect_doc2)
+		print (word_vect_doc1)
+		print (word_vect_doc2)
 
 		all_words = list(word_vect_doc1.keys()) + list(word_vect_doc2.keys())
 		all_words = list(set(all_words))
