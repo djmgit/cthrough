@@ -52,7 +52,7 @@ class SimLib:
 		return float(sum_square**0.5)
 
 	def get_dot_product(self, vect1, vect2):
-		dot_product = [v1 * v2 for v1, v2 in zip(vect1, vect2)]
+		dot_product = sum([v1 * v2 for v1, v2 in zip(vect1, vect2)])
 		return dot_product
 
 	def get_cos_sim(self, vect1, vect2):
@@ -80,12 +80,12 @@ class SimLib:
 		self.response = cos_sim
 
 	def get_response(self):
-		return self.cos_sim
+		return self.response
 
 # for testing
 if __name__ == '__main__':
 	text1 = 'I live in India. I am from west bengal, kolkata'
 	text2 = 'I am from India. I have come from west bengal, kolkata'
 
-	slib = SimLib(text1, text2)
+	slib = SimLib(text1, text2).get_response()
 	print (slib)
