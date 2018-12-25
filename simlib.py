@@ -28,17 +28,17 @@ class SimLib:
 			word_list += keywords
 
 		# remove stopwords
-		word_list = [w if w not in stopwords]
+		word_list = [w for w in word_list if w not in stopwords]
 
 		# count occurences
 		count_vect = {}
 		for word in word_list:
-			count_vect[word] = count_vect.get(word, 0) += 1
+			count_vect[word] = count_vect.get(word, 0) + 1
 
 		return count_vect
 
 	def get_cos_vector(self, all_words, word_vect):
-		vector = []
+		vector = [0 for w in all_words]
 		index = 0
 
 		for word in all_words:
@@ -61,16 +61,16 @@ class SimLib:
 
 	def findsim(self):
 		kextractor = KnowledgeExtractor()
-		kextractor.set_text_and_extract(doc1)
+		kextractor.set_text_and_extract(self.doc1)
 		resource1 = kextractor.get_response()
 
-		kextractor.set_text_and_extract(doc2)
+		kextractor.set_text_and_extract(self.doc2)
 		resource2 = kextractor.get_response()
 
 		word_vect_doc1 = self.get_word_vector(resource1)
 		word_vect_doc2 = self.get_word_vector(resource2)
 
-		all_words = word_vect_doc1.keys() + word_vect_doc2.keys()
+		all_words = list(word_vect_doc1.keys()) + list(word_vect_doc2.keys())
 		all_words = list(set(all_words))
 
 		cos_vect1 = self.get_cos_vector(all_words, word_vect_doc1)
@@ -82,7 +82,10 @@ class SimLib:
 	def get_response(self):
 		return self.cos_sim
 
+# for testing
+if __name__ == '__main__':
+	text1 = 'I live in India. I am from west bengal, kolkata'
+	text2 = 'I am from India. I have come from west bengal, kolkata'
 
-
-
-
+	slib = SimLib(text1, text2)
+	print (slib)
