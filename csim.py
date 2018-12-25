@@ -12,7 +12,8 @@ class Csim:
 		similar_docs = []
 
 		for doc in list_of_docs:
-			score = self.slib.set_data_and_find_sim(primary_doc.get('content'), doc.get('content')).get_response()
+			self.slib.set_data_and_find_sim(primary_doc.get('content'), doc.get('content'))
+			score = self.slib.get_response()
 			if score > threshold:
 				similar_docs.append({
 					"name": doc.get("name"),
@@ -45,29 +46,26 @@ class Csim:
 
 	def cluster_docs(self, list_of_docs, threshold=0.5):
 		clusters = []
-		has_cluster = {}
 
 		for index_i in range(len(list_of_docs)):
 			for index_j in range(index_i + 1, len(list_of_docs)):
 				doc1 = list_of_docs[index_i]
 				doc2 = list_of_docs[index_j]
-				if has_cluster.get(doc1.get("name")) and has_cluster.get(doc2.get("name")):
-					continue
 				score = self.find_sim_between_two(doc1.get("content"), doc2.get("content"))
+				print (doc1.get("name"), doc2.get("name"), score)
 
 				doc1_cluster_id = self.get_cluster_id(clusters, doc1.get("name"))
 				doc2_cluster_id = self.get_cluster_id(clusters, doc2.get("name"))
 
-				if doc1_cluster_id == None and doc2_cluster_id == None:
-					clusters.append([doc1.get("name"), doc2.get("name")])
-					has_cluster[doc1.get("name")] = 1
-					has_cluster[doc2.get("name")] = 1
-				elif doc1_cluster_id == None and doc2_cluster_id != None:
-					clusters[doc2_cluster_id].append(doc1.get("name"))
-					has_cluster[doc1.get("name")] = 1
-				elif doc1_cluster_id != None and doc2_cluster_id == None:
-					clusters[doc1_cluster_id].append(doc2.get("name"))
-					has_cluster[doc2.get("name")] = 1
+				print (doc1_cluster_id, doc2_cluster_id)
+
+				if score > threshold:
+					if doc1_cluster_id == None and doc2_cluster_id == None:
+						clusters.append([doc1.get("name"), doc2.get("name")])
+					elif doc1_cluster_id == None and doc2_cluster_id != None:
+						clusters[doc2_cluster_id].append(doc1.get("name"))
+					elif doc1_cluster_id != None and doc2_cluster_id == None:
+						clusters[doc1_cluster_id].append(doc2.get("name"))
 
 		return clusters
 
@@ -81,12 +79,12 @@ if __name__ == "__main__":
 	doc5 = {"name":"test5.txt", "content": "I do not like fast food. I like to eat home made food more."}
 
 	list_of_docs = [doc1, doc2, doc3, doc4, doc5]
-	print (csim.find_sim_between_two(doc1['content'], doc2['content']))
-	print ("\n")
-	print (csim.find_similar_docs(doc1, [doc2, doc3, doc4, doc5], 0.8))
-	print ("\n")
-	print (csim.find_similarity_pairs(list_of_docs))
-	print ("\n")
-	print (csim.cluster_docs())
+	#print (csim.find_sim_between_two(doc1['content'], doc2['content']))
+	#print ("\n")
+	#print (csim.find_similar_docs(doc1, [doc2, doc3, doc4, doc5], 0.5))
+	#print ("\n")
+	#print (csim.find_similarity_pairs(list_of_docs))
+	#print ("\n")
+	print (csim.cluster_docs(list_of_docs))
 
 
