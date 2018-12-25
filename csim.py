@@ -64,8 +64,10 @@ class Csim:
 					has_cluster[doc2.get("name")] = 1
 				elif doc1_cluster_id == None and doc2_cluster_id != None:
 					clusters[doc2_cluster_id].append(doc1.get("name"))
+					has_cluster[doc1.get("name")] = 1
 				elif doc1_cluster_id != None and doc2_cluster_id == None:
 					clusters[doc1_cluster_id].append(doc2.get("name"))
+					has_cluster[doc2.get("name")] = 1
 
 		return clusters
 
