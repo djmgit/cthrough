@@ -51,8 +51,13 @@ class SimLib:
 		sum_square = sum([v*v for v in vect])
 		return float(sum_square**0.5)
 
+	def get_dot_product(self, vect1, vect2):
+		dot_product = [v1 * v2 for v1, v2 in zip(vect1, vect2)]
+		return dot_product
+
 	def get_cos_sim(self, vect1, vect2):
-		# calculate 
+		costheta = float(self.get_dot_product(vect1, vect2) / (self.get_mod(vect1) * self.get_mod(vect2)))
+		return costheta
 
 	def findsim(self):
 		kextractor = KnowledgeExtractor()
@@ -72,6 +77,10 @@ class SimLib:
 		cos_vect2 = self.get_cos_vector(all_words, word_vect_doc2)
 
 		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
+		self.response = cos_sim
+
+	def get_response(self):
+		return self.cos_sim
 
 
 
