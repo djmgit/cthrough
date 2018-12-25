@@ -25,6 +25,7 @@ class SimLib:
 			# keyword might consists of more than one word
 			# we need to split it and add it to list as separate words
 			keywords = keyword.split()
+			keywords = [k.lower() for k in keywords]
 			word_list += keywords
 
 		# extract entities also
@@ -34,6 +35,7 @@ class SimLib:
 
 			# same as keywords, split if more that one word
 			entities = entity.split()
+			entities = [e.lower() for e in entities]
 			word_list += entities
 
 		# remove stopwords
@@ -78,6 +80,9 @@ class SimLib:
 
 		word_vect_doc1 = self.get_word_vector(resource1)
 		word_vect_doc2 = self.get_word_vector(resource2)
+
+		print (word_vect_doc1)
+		print (word_vect_doc2)
 
 		all_words = list(word_vect_doc1.keys()) + list(word_vect_doc2.keys())
 		all_words = list(set(all_words))
