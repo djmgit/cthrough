@@ -67,6 +67,25 @@ def find_similar_pairs():
 
 	return jsonify(build_response("OK", data))
 
+@app.route('/api/v1/cluster_docs', methods=["POST"])
+def cluster_docs():
+	json_data = request.json
+	list_of_docs = json_data.get("list_of_docs")
+	threshold = json_data.get("threshold")
+
+	if not is_valid_list(list_of_docs):
+		return jsonify(build_response("FAILED", "INVALID LIST OF DOCS"))
+	if threshold and not is_valid_threshold(threshold):
+		return jsonify(build_response("FAILED", "INVALID THRESHOLD"))
+
+	data = ""
+	if threshold:
+		data = sim_handler.cluster_docs(list_of_docs, threshold)
+	else:
+		data = sim_handler.cluster_docs(list_of_docs)
+
+	return jsonify(build_response("OK", data))
+
 
 
 if __name__ == "__main__":
