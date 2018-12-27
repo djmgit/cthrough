@@ -15,6 +15,11 @@ def is_valid_list(docs):
 			return False
 	return False
 
+def is_valid_threshold(threshold):
+	if threshold < 0 or threshold > 1:
+		return False
+	return True
+
 def build_response(status, data):
 	response = {
 		"status": status,
