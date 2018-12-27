@@ -32,6 +32,14 @@ def find_sim_between_two():
 
 	return jsonify(response)
 
+@app.route('/api/v1/find_similar_docs', methods=["POST"])
+def find_similar_docs():
+	json_data = request.json
+	primary_doc = json_data.get('primary_doc')
+	list_of_docs = json_data.get("list_of_docs")
+
+	
+
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', debug=True)
 
