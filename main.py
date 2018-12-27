@@ -42,7 +42,7 @@ def find_similar_docs():
 
 	if not is_valid(primary_doc):
 		return jsonify(build_response("FAILED", "INVALID PRIMARY DOC"))
-	if not is_valid(list_of_docs):
+	if not is_valid_list(list_of_docs):
 		return jsonify(build_response("FAILED", "INVALID LIST OF DOCS"))
 	if threshold and not is_valid_threshold(threshold):
 		return jsonify(build_response("FAILED", "INVALID THRESHOLD"))
@@ -53,7 +53,19 @@ def find_similar_docs():
 	else:
 		data = sim_handler.find_similar_docs(primary_doc, list_of_docs)
 
-	return jsonify(build_response("FAILED", data))
+	return jsonify(build_response("OK", data))
+
+@app.route('/api/v1/find_similarity_pairs', methods=["POST"])
+def find_similar_pairs():
+	json_data = request.json
+	list_of_docs = json_data.get("list_of_docs")
+
+	if not is_valid_list(list_of_docs):
+		return jsonify(build_response("FAILED", "INVALID LIST OF DOCS"))
+
+	data = sim_handler.find_similarity_pairs(list_of_docs)
+
+	return jsonify(build_response("OK", data))
 
 
 
