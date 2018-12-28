@@ -40,7 +40,7 @@ def find_similar_docs():
 	list_of_docs = json_data.get("list_of_docs")
 	threshold = json_data.get("threshold")
 
-	if not is_valid(primary_doc):
+	if not is_valid_doc(primary_doc):
 		return jsonify(build_response("FAILED", "INVALID PRIMARY DOC"))
 	if not is_valid_list(list_of_docs):
 		return jsonify(build_response("FAILED", "INVALID LIST OF DOCS"))

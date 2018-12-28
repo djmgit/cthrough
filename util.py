@@ -3,14 +3,14 @@
 '''
 
 def is_valid_doc(doc):
-	if not dodc:
+	if not doc:
 		return False
 	if doc.get("name") and doc.get("content"):
 		return True
 	return False
 
 def is_valid_list(docs):
-	if not dodc:
+	if not docs:
 		return False
 	for doc in docs:
 		if doc.get("name") and doc.get("content"):
