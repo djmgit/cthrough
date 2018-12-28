@@ -16,8 +16,9 @@ def is_valid_list(docs):
 		if doc.get("name") and doc.get("content"):
 			continue
 		else:
+			print (doc)
 			return False
-	return False
+	return True
 
 def is_valid_threshold(threshold):
 	if threshold < 0 or threshold > 1:
