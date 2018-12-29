@@ -12,8 +12,8 @@ def make_request(data):
 	print (data.get("operation"))
 	print (json.dumps(data, indent=4))
 	print ('\n')
-	response = handler(data)
-	print (json.dumps(response.json(), indent=4))
+	response = handler(data, None)
+	print (json.dumps(response, indent=4))
 
 make_request({"operation": 'find_sim_between_two', 'doc1': doc1.get("content"), 'doc2': doc2.get("content")})
 make_request({"operation": 'find_similar_docs', 'primary_doc': doc1, 'list_of_docs': [doc2, doc3, doc4, doc5]})

@@ -6,6 +6,8 @@ import json
 from csim import Csim
 from util import *
 
+sim_handler = Csim()
+
 def find_sim_between_two(doc1, doc2):
 	if doc1 and doc2:
 		score = sim_handler.find_sim_between_two(doc1, doc2)
