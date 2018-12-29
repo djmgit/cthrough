@@ -8,4 +8,4 @@ export PYTHON_VERSION='python3.6'
 cd $VIRTUALENV/lib/$PYTHON_VERSION/site-packages/
 zip -r9 ../../../../$ZIP_FILE *
 cd ../../../../
-zip -g $ZIP_FILE csim.py knowledge_extractor.py simlib.py stopwords.py lambda_handler.py
+zip -g $ZIP_FILE csim.py knowledge_extractor.py simlib.py stopwords.py lambda_handler.py util.py

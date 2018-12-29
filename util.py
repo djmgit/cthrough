@@ -32,3 +32,16 @@ def build_response(status, data):
 	}
 
 	return response
+
+def is_valid_op(operation):
+	valid_ops = [
+		"find_sim_between_two",
+		"find_similar_docs",
+		"find_similar_pairs",
+		"cluster_docs"
+	]
+
+	if not operation or operation not in valid_ops:
+		return False
+
+	return True
