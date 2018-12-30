@@ -5,32 +5,40 @@
 import json, boto3
 
 role_policy_document = {
-    "Version": "2018-12-30",
+    "Version": "2012-10-17",
     "Statement": [
         {
             "Effect": "Allow",
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            },
             "Action": [
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
-                "logs:PutLogEvents"
-            ],
-            "Resource": "arn:aws:logs:*:*:*"
+                "logs:PutLogEvents",
+                "sts:AssumeRole"
+            ]
         },
         {
             "Action": [
-                "comprehend:DetectDominantLanguage",
-                "comprehend:DetectSentiment",
-                "comprehend:DetectEntities",
-                "comprehend:DetectKeyPhrases"
+                "comprehend:*",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "iam:ListRoles",
+                "iam:GetRole",
+                "sts:AssumeRole"
             ],
             "Effect": "Allow",
-            "Resource": "*"
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            }
         }
     ]
 }
 
 
-iam_client = boto3.client(service_name='iam', region_name='us-east-1')
+iam_client = boto3.client('iam')
 
 iam_client.create_role(
   RoleName='CthroughLambda',
