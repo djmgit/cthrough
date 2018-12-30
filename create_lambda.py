@@ -18,7 +18,7 @@ lambda_client.create_function(
   FunctionName='cthrough_lambda_func',
   Runtime='python3.6',
   Role=role['Role']['Arn'],
-  Handler='lambda_handler.handler',
+  Handler='lambda_func.handler',
   Code=dict(ZipFile=zipped_code),
   Timeout=300, # Maximum allowable timeout
   Environment=dict(Variables=env_variables),

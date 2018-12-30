@@ -1,4 +1,4 @@
-from lambda_handler import handler
+from lambda_func import handler
 
 import json
 
