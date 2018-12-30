@@ -1,5 +1,12 @@
 from knowledge_extractor import KnowledgeExtractor
 from stopwords import stopwords
+import imp
+import sys
+'''
+	hack for aws lambda sqlite issue
+'''
+sys.modules["sqlite"] = imp.new_module("sqlite")
+sys.modules["sqlite3.dbapi2"] = imp.new_module("sqlite.dbapi2")
 from nltk import PorterStemmer
 
 class SimLib:

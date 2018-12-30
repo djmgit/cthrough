@@ -1,5 +1,9 @@
 #! /bin/bash
 
+if [ ! -e "cthrough_lambda.zip"  ]; then
+	echo "removing existing package"
+	rm cthrough_lambda.zip
+fi
 export VIRTUALENV='cthrough_lambda_env'
 export ZIP_FILE='cthrough_lambda.zip'
 export PYTHON_VERSION='python3.6'
