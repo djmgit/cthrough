@@ -2,6 +2,8 @@
 	some utility methods
 '''
 
+import json
+
 def is_valid_doc(doc):
 	if not doc:
 		return False
@@ -45,3 +47,8 @@ def is_valid_op(operation):
 		return False
 
 	return True
+
+def conv_to_obj(param):
+	if type(param).__name__ == "str":
+		return json.loads(param)
+	return param

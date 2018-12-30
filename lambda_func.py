@@ -26,6 +26,9 @@ def find_sim_between_two(doc1, doc2):
 	return response
 
 def find_similar_docs(primary_doc, list_of_docs, threshold=None):
+	if threshold != None:
+		threshold = float(threshold)
+
 	if not is_valid_doc(primary_doc):
 		return build_response("FAILED", "INVALID PRIMARY DOC")
 	if not is_valid_list(list_of_docs):
@@ -34,7 +37,7 @@ def find_similar_docs(primary_doc, list_of_docs, threshold=None):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
 	data = ""
-	if threshold:
+	if threshold != None:
 		data = sim_handler.find_similar_docs(primary_doc, list_of_docs, threshold)
 	else:
 		data = sim_handler.find_similar_docs(primary_doc, list_of_docs)
@@ -50,6 +53,9 @@ def find_similar_pairs(list_of_docs):
 	return build_response("OK", data)
 
 def cluster_docs(list_of_docs, threshold=None):
+	if threshold != None:
+		threshold = float(threshold)
+
 	if not is_valid_list(list_of_docs):
 		return build_response("FAILED", "INVALID LIST OF DOCS")
 	if threshold and not is_valid_threshold(threshold):
@@ -65,6 +71,7 @@ def cluster_docs(list_of_docs, threshold=None):
 
 def handler(event, context):
 	operation = event.get("operation")
+	print (event)
 
 	if not is_valid_op(operation):
 		return build_response("FAILED", "INVALID_OPERATION")
@@ -73,7 +80,9 @@ def handler(event, context):
 		return find_sim_between_two(event.get("doc1"), event.get("doc2"))
 
 	if operation == "find_similar_docs":
-		return find_similar_docs(event.get("primary_doc"), event.get("list_of_docs"), event.get("threshold"))
+		primary_doc = conv_to_obj(event.get("primary_doc"))
+		list_of_docs = conv_to_obj(event.get("list_of_docs"))
+		return find_similar_docs(primary_doc, list_of_docs, event.get("threshold"))
 
 	if operation == "find_similar_pairs":
 		return find_similar_pairs(event.get("list_of_docs"))
