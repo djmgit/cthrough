@@ -1,10 +1,10 @@
 from knowledge_extractor import KnowledgeExtractor
 from stopwords import stopwords
-import nltk
+from nltk import PorterStemmer
 
 class SimLib:
 	def __init__(self, doc1="", doc2=""):
-		self.porter = nltk.PorterStemmer()
+		self.porter = PorterStemmer()
 		if doc1 and doc2:
 			self.doc1 = doc1
 			self.doc2 = doc2
