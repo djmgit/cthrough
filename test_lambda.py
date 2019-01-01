@@ -17,7 +17,7 @@ def make_request(data):
 
 make_request({"operation": 'find_sim_between_two', 'doc1': doc1.get("content"), 'doc2': doc2.get("content")})
 make_request({"operation": 'find_similar_docs', 'primary_doc': doc1, 'list_of_docs': [doc2, doc3, doc4, doc5]})
-make_request({"operation": 'find_similarity_pairs', 'list_of_docs': [doc1, doc2, doc3, doc4, doc5]})
+make_request({"operation": 'find_similar_pairs', 'list_of_docs': [doc1, doc2, doc3, doc4, doc5]})
 make_request({"operation": 'cluster_docs', 'list_of_docs': [doc1, doc2, doc3, doc4, doc5], 'threshold': 0.4})
 
 #doc6 = {"name": "test1", "content": "i love burgers"}

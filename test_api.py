@@ -15,7 +15,7 @@ def make_request(url, data):
 	print (response.status_code)
 	print (json.dumps(response.json(), indent=4))
 
-make_request('http://127.0.0.1:5000/api/v1/find_sim_between_two', {'doc1': doc1.get("content"), 'doc2': doc2.get("content")})
-make_request('http://127.0.0.1:5000/api/v1/find_similar_docs', {'primary_doc': doc1, 'list_of_docs': [doc2, doc3, doc4, doc5]})
-make_request('http://127.0.0.1:5000/api/v1/find_similarity_pairs', {'list_of_docs': [doc1, doc2, doc3, doc4, doc5]})
-make_request('http://127.0.0.1:5000/api/v1/cluster_docs', {'list_of_docs': [doc1, doc2, doc3, doc4, doc5], 'threshold': 0.4})
+make_request('https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-sim-between-two', {'doc1': doc1.get("content"), 'doc2': doc2.get("content")})
+make_request('https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-similar-docs', {'primary_doc': doc1, 'list_of_docs': [doc2, doc3, doc4, doc5], "threshold": 0.4})
+make_request('https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-similar-pairs', {'list_of_docs': [doc1, doc2, doc3, doc4, doc5]})
+make_request('https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/cluster-docs', {'list_of_docs': [doc1, doc2, doc3, doc4, doc5], 'threshold': 0.4})
