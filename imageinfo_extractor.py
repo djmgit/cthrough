@@ -41,4 +41,4 @@ if "__name__" == "__main__":
 		imageinfo_extractor = ImageInfoExtractor(image)
 		response = imageinfo_extractor.get_response()
 
-	print (response)
+	print (json.dumps(response, indent=4))
