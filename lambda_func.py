@@ -82,7 +82,7 @@ def handler(event, context):
 	if operation == "find_similar_docs":
 		#primary_doc = conv_to_obj(event.get("primary_doc"))
 		#list_of_docs = conv_to_obj(event.get("list_of_docs"))
-		return find_similar_docs(primary_doc, list_of_docs, event.get("threshold"))
+		return find_similar_docs(event.get("primary_doc"), event.get("list_of_docs"), event.get("threshold"))
 
 	if operation == "find_similar_pairs":
 		return find_similar_pairs(event.get("list_of_docs"))

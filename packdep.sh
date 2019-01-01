@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ ! -e "cthrough_lambda.zip"  ]; then
+if [ -e "cthrough_lambda.zip"  ]; then
 	echo "removing existing package"
 	rm cthrough_lambda.zip
 fi
