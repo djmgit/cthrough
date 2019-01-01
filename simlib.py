@@ -1,4 +1,5 @@
 from knowledge_extractor import KnowledgeExtractor
+from imageinfo_extractor import ImageInfoExtractor
 from stopwords import stopwords
 import imp
 import sys
@@ -133,6 +134,29 @@ class SimLib:
 
 		#print (cos_vect1)
 		#print (cos_vect2)
+
+		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
+		self.response = cos_sim
+
+	def findsim_img(self, img1, img2):
+		iinfo_extractor = ImageInfoExtractor()
+		iinfo_extractor.set_img_and_extract(img1)
+		resource1 = iinfo_extractor.response()
+
+		iinfo_extractor.set_img_and_extract(img2)
+		resource2 = iinfo_extractor.response()
+
+		word_vect_img1 = self.get_word_vector_img(resource1)
+		word_vect_img2 = self.get_word_vector_img(resource2)
+
+		print (word_vect_img1)
+		print (word_vect_img2)
+
+		all_labels = list(word_vect_img1.keys()) + list(word_vect_img2.keys())
+		all_labels = list(set(all_labels))
+
+		cos_vect1 = self.get_cos_vector(all_labels, word_vect_img1)
+		cos_vect2 = self.get_cos_vector(all_labels, word_vect_img2)
 
 		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
 		self.response = cos_sim
