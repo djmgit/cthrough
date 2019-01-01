@@ -34,7 +34,7 @@ class ImageInfoExtractor:
 	def get_response(self):
 		return self.response
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
 	imageFile = "/home/deep/cthrough/skate.jpg"
 
 	with open(imageFile, 'rb') as image:
