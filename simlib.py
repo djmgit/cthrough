@@ -2,6 +2,8 @@ from knowledge_extractor import KnowledgeExtractor
 from stopwords import stopwords
 import imp
 import sys
+import json
+import tokenizer
 '''
 	hack for aws lambda sqlite issue
 '''
@@ -57,6 +59,23 @@ class SimLib:
 
 		return count_vect
 
+	def get_word_vector_tokn(self, doc):
+		word_list = []
+
+		for token in tokenizer.tokenize(doc):
+			if token.kind == tokenizer.TOK.WORD:
+				word_list.append(token.txt)
+
+		word_list = [self.porter.stem(w.lower()) for w in word_list]
+
+		# count word occurences
+
+		count_vect = {}
+		for word in word_list:
+			count_vect[word] = count_vect.get(word, 0) + 1
+
+		return count_vect
+
 	def get_cos_vector(self, all_words, word_vect):
 		vector = [0 for w in all_words]
 		index = 0
@@ -87,8 +106,19 @@ class SimLib:
 		kextractor.set_text_and_extract(self.doc2)
 		resource2 = kextractor.get_response()
 
+		#print (self.doc1)
+		#print (self.doc2)
+
+		#print (json.dumps(resource1, indent=4))
+		#print (json.dumps(resource2, indent=4))
+
 		word_vect_doc1 = self.get_word_vector(resource1)
 		word_vect_doc2 = self.get_word_vector(resource2)
+
+		if len(word_vect_doc1.keys()) == 0 or len(word_vect_doc2.keys()) == 0:
+			print ("comprehend is not able to return keywords or entities, use tokenizer")
+			word_vect_doc1 = self.get_word_vector_tokn(self.doc1)
+			word_vect_doc2 = self.get_word_vector_tokn(self.doc2)
 
 		print (word_vect_doc1)
 		print (word_vect_doc2)
@@ -96,8 +126,13 @@ class SimLib:
 		all_words = list(word_vect_doc1.keys()) + list(word_vect_doc2.keys())
 		all_words = list(set(all_words))
 
+		#print (all_words)
+
 		cos_vect1 = self.get_cos_vector(all_words, word_vect_doc1)
 		cos_vect2 = self.get_cos_vector(all_words, word_vect_doc2)
+
+		#print (cos_vect1)
+		#print (cos_vect2)
 
 		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
 		self.response = cos_sim

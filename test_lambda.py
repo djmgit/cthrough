@@ -20,3 +20,7 @@ make_request({"operation": 'find_similar_docs', 'primary_doc': doc1, 'list_of_do
 make_request({"operation": 'find_similarity_pairs', 'list_of_docs': [doc1, doc2, doc3, doc4, doc5]})
 make_request({"operation": 'cluster_docs', 'list_of_docs': [doc1, doc2, doc3, doc4, doc5], 'threshold': 0.4})
 
+#doc6 = {"name": "test1", "content": "i love burgers"}
+#doc7 = {"name": "test2", "content": "i love burgers very much"}
+#doc8 = {"name": "test3", "content": "I love pizzas more"}
+#make_request({"operation": "find_similar_docs", "primary_doc": doc6, "list_of_docs": [doc7, doc8]})
