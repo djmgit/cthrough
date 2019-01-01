@@ -38,7 +38,7 @@ if __name__ == "__main__":
 	imageFile = "/home/deep/cthrough/skate.jpg"
 
 	with open(imageFile, 'rb') as image:
-		imageinfo_extractor = ImageInfoExtractor(image)
+		imageinfo_extractor = ImageInfoExtractor(image.read())
 		response = imageinfo_extractor.get_response()
 
 	print (json.dumps(response, indent=4))
