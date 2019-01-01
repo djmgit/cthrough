@@ -138,13 +138,44 @@ class SimLib:
 		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
 		self.response = cos_sim
 
+	def get_word_vector_img(self, resource):
+		word_list = []
+		labels = resource.get("label_data").get("Labels")
+
+		for label in labels:
+			label_text = label['Name']
+
+			# label might consists of more than one word
+			# we need to split it and add it to list as separate words
+			label_words = label_text.split()
+			label_words = [self.porter.stem(k.lower()) for k in label_words]
+			word_list += label_words
+
+		texts = resource.get("text_data").get("TextDetections")
+		for text in texts:
+			text_word = text['DetectedText']
+
+			text_words = text_word.split()
+			text_words = [self.porter.stem(k.lower()) for k in text_words]
+			word_list += text_words
+
+		# remove stopwords
+		word_list = [w for w in word_list if w not in stopwords]
+
+		# count occurences
+		count_vect = {}
+		for word in word_list:
+			count_vect[word] = count_vect.get(word, 0) + 1
+
+		return count_vect
+
 	def findsim_img(self, img1, img2):
 		iinfo_extractor = ImageInfoExtractor()
 		iinfo_extractor.set_img_and_extract(img1)
-		resource1 = iinfo_extractor.response()
+		resource1 = iinfo_extractor.get_response()
 
 		iinfo_extractor.set_img_and_extract(img2)
-		resource2 = iinfo_extractor.response()
+		resource2 = iinfo_extractor.get_response()
 
 		word_vect_img1 = self.get_word_vector_img(resource1)
 		word_vect_img2 = self.get_word_vector_img(resource2)
@@ -166,8 +197,15 @@ class SimLib:
 
 # for testing
 if __name__ == '__main__':
-	text1 = 'I live in India. I am from west bengal, kolkata'
-	text2 = 'I am from India. I have come from west bengal, kolkata'
+	#text1 = 'I live in India. I am from west bengal, kolkata'
+	#text2 = 'I am from India. I have come from west bengal, kolkata'
 
-	slib = SimLib(text1, text2).get_response()
-	print (slib)
+	with open('/home/deep/cthrough/skate.jpg', 'rb') as image1:
+		img1 = image1.read()
+	with open('/home/deep/cthrough/skate1.jpg', 'rb') as image2:
+		img2 = image2.read()
+
+	slib = SimLib()
+	slib.findsim_img(img1, img2)
+	score = slib.get_response()
+	print (score)
