@@ -26,4 +26,10 @@ class ImageInfoExtractor:
 		return text_data
 
 	def extract_imageinfo(self):
-		pass
+		self.response = {
+			"label_data": self.extract_labels(),
+			"text_data": self.extract_text()
+		}
+
+	def get_response(self):
+		return self.response
