@@ -192,6 +192,37 @@ class SimLib:
 		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
 		self.response = cos_sim
 
+	def findsim_img_text(self, img, doc):
+		iinfo_extractor = ImageInfoExtractor()
+		iinfo_extractor.set_img_and_extract(img1)
+		img_resource = iinfo_extractor.get_response()
+
+		kextractor = KnowledgeExtractor()
+		kextractor.set_text_and_extract(doc)
+		txt_resource = kextractor.get_response()
+
+		word_vect_txt = self.get_word_vector(txt_resource)
+
+		word_vect_img = self.get_word_vector_img(img_resource)
+
+		print (word_vect_txt)
+		print (word_vect_img)
+
+		all_words = list(word_vect_txt.keys()) + list(word_vect_img.keys())
+		all_words = list(set(all_words))
+
+		#print (all_words)
+
+		cos_vect1 = self.get_cos_vector(all_words, word_vect_txt)
+		cos_vect2 = self.get_cos_vector(all_words, word_vect_img)
+
+		#print (cos_vect1)
+		#print (cos_vect2)
+
+		cos_sim = self.get_cos_sim(cos_vect1, cos_vect2)
+		self.response = cos_sim
+
+
 	def get_response(self):
 		return self.response
 
@@ -204,8 +235,9 @@ if __name__ == '__main__':
 		img1 = image1.read()
 	with open('/home/deep/cthrough/skate1.jpg', 'rb') as image2:
 		img2 = image2.read()
+	txt = "A human loves skate boarding. I too have a skateboard at my house. I often use it in my garden while playing."
 
 	slib = SimLib()
-	slib.findsim_img(img1, img2)
+	slib.findsim_img_text(img1, txt)
 	score = slib.get_response()
 	print (score)
