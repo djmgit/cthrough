@@ -194,7 +194,7 @@ class SimLib:
 
 	def findsim_img_text(self, img, doc):
 		iinfo_extractor = ImageInfoExtractor()
-		iinfo_extractor.set_img_and_extract(img1)
+		iinfo_extractor.set_img_and_extract(img)
 		img_resource = iinfo_extractor.get_response()
 
 		kextractor = KnowledgeExtractor()

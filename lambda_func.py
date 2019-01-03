@@ -69,6 +69,7 @@ def cluster_docs(list_of_docs, threshold=None):
 
 	return build_response("OK", data)
 
+
 def handler(event, context):
 	operation = event.get("operation")
 	print (event)

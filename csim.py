@@ -103,12 +103,12 @@ class Csim:
 
 		for image in list_of_images:
 			score = self.find_sim_between_img_txt(image.get("content"), primary_doc.get("content"))
-			if score >threshold:
+			if score > threshold:
 				similar_images.append({
 					"name": image.get("name"),
 					"score": score
 				})
-		return similar_docs
+		return similar_images
 
 	def cluster_img(self, list_of_images, threshold=0.5):
 		clusters = []
@@ -152,13 +152,32 @@ if __name__ == "__main__":
 	doc4 = {"name":"test4.txt", "content": "I love cheese burst pizzas. Dominos and smokin joe are great pizza shops."}
 	doc5 = {"name":"test5.txt", "content": "I do not like fast food. I like to eat home made food more."}
 
-	list_of_docs = [doc1, doc2, doc3, doc4, doc5]
-	print (csim.find_sim_between_two(doc1['content'], doc2['content']))
+	#list_of_docs = [doc1, doc2, doc3, doc4, doc5]
+	#print (csim.find_sim_between_two(doc1['content'], doc2['content']))
 	#print ("\n")
 	#print (csim.find_similar_docs(doc1, [doc2, doc3, doc4, doc5], 0.5))
 	#print ("\n")
 	#print (csim.find_similarity_pairs(list_of_docs))
 	#print ("\n")
 	#print (csim.cluster_docs(list_of_docs, 0.4))
+
+	doc1 = {"name": "test1.txt", "content": "A human loves skate boarding. I too have a skateboard at my house. I often use it in my garden while playing."}
+	doc2 = {"name": "test2.txt", "content": "i love burgers very much."}
+	with open('/home/deep/cthrough/skate.jpg', 'rb') as image1:
+		img1 = image1.read()
+
+	with open('/home/deep/cthrough/basket.jpg', 'rb') as image2:
+		img2 = image2.read()
+
+	with open('/home/deep/cthrough/skate.jpg', 'rb') as image3:
+		img3 = image3.read()
+
+	img1 = {"name": "img1", "content": img1}
+	img2 = {"name": "img2", "content": img2}
+	img3 = {"name": "img3", "content": img3}
+
+	print (csim.cluster_img([img1, img2, img3], 0.2))
+
+
 
 
