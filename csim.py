@@ -85,7 +85,18 @@ class Csim:
 		self.slib.findsim_img_text(img, text)
 		return self.slib.get_response()
 
-	
+	def docs_similar_to_img(self, primary_image, list_of_images):
+		similar_docs = []
+
+		for doc in list_of_docs:
+			score = self.find_sim_between_img_txt(primary_image, doc.get("content"))
+			if score > threshold:
+				similar_docs.append({
+					"name": doc.get("name"),
+					"score": score 
+				})
+
+		return similar_docs
 
 if __name__ == "__main__":
 	csim = Csim()
