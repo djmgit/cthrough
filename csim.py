@@ -89,7 +89,7 @@ class Csim:
 		similar_docs = []
 
 		for doc in list_of_docs:
-			score = self.find_sim_between_img_txt(primary_image, doc.get("content"))
+			score = self.find_sim_between_img_txt(primary_image.get("content"), doc.get("content"))
 			if score > threshold:
 				similar_docs.append({
 					"name": doc.get("name"),
