@@ -69,6 +69,77 @@ def cluster_docs(list_of_docs, threshold=None):
 
 	return build_response("OK", data)
 
+def find_sim_between_two_images(img1, img2):
+	if img1 and img2:
+		score = sim_handler.find_sim_between_two_img(img1, img2)
+		response = {
+			"status": "OK",
+			"data": {
+				"score": score
+			}
+		}
+	else:
+		response = {
+			"status": "FAILED",
+			"data": "NOT ENOUGH PARAMETERS"
+		}
+
+	return response
+
+def find_sim_between_image_text(img, doc):
+	if img and doc:
+		score = sim_handler.find_sim_between_img_txt(img, doc)
+		response = {
+			"status": "OK",
+			"data": {
+				"score": score
+			}
+		}
+	else:
+		response = {
+			"status": "FAILED",
+			"data": "NOT ENOUGH PARAMETERS"
+		}
+
+	return response
+
+def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
+	if threshold != None:
+		threshold = float(threshold)
+
+	if not is_valid_doc(primary_image):
+		return build_response("FAILED", "INVALID PRIMARY DOC")
+	if not is_valid_list(list_of_docs):
+		return build_response("FAILED", "INVALID LIST OF DOCS")
+	if threshold and not is_valid_threshold(threshold):
+		return build_response("FAILED", "INVALID THRESHOLD")
+
+	data = ""
+	if threshold != None:
+		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs, threshold)
+	else:
+		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs)
+
+	return build_response("OK", data)
+
+def find_images_similar_to_doc(primary_image, list_of_docs, threshold=0.5):
+	if threshold != None:
+		threshold = float(threshold)
+
+	if not is_valid_doc(primary_image):
+		return build_response("FAILED", "INVALID PRIMARY DOC")
+	if not is_valid_list(list_of_docs):
+		return build_response("FAILED", "INVALID LIST OF DOCS")
+	if threshold and not is_valid_threshold(threshold):
+		return build_response("FAILED", "INVALID THRESHOLD")
+
+	data = ""
+	if threshold != None:
+		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs, threshold)
+	else:
+		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs)
+
+	return build_response("OK", data)
 
 def handler(event, context):
 	operation = event.get("operation")
