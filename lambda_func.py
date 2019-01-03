@@ -141,6 +141,23 @@ def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 
 	return build_response("OK", data)
 
+def cluster_docs(list_of_images, threshold=None):
+	if threshold != None:
+		threshold = float(threshold)
+
+	if not is_valid_list(list_of_images):
+		return build_response("FAILED", "INVALID LIST OF DOCS")
+	if threshold and not is_valid_threshold(threshold):
+		return build_response("FAILED", "INVALID THRESHOLD")
+
+	data = ""
+	if threshold:
+		data = sim_handler.cluster_img(list_of_images, threshold)
+	else:
+		data = sim_handler.cluster_img(list_of_images)
+
+	return build_response("OK", data)
+
 def handler(event, context):
 	operation = event.get("operation")
 	print (event)
