@@ -77,6 +77,16 @@ class Csim:
 
 		return clusters
 
+	def find_sim_between_two_img(self, img1, img2):
+		self.slib.findsim_img(img1, img2)
+		return self.slib.get_response()
+
+	def find_sim_between_img_txt(self, img, text):
+		self.slib.findsim_img_text(img, text)
+		return self.slib.get_response()
+
+	
+
 if __name__ == "__main__":
 	csim = Csim()
 
