@@ -108,7 +108,7 @@ def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
 		threshold = float(threshold)
 
 	if not is_valid_doc(primary_image):
-		return build_response("FAILED", "INVALID PRIMARY DOC")
+		return build_response("FAILED", "INVALID PRIMARY IMAGE")
 	if not is_valid_list(list_of_docs):
 		return build_response("FAILED", "INVALID LIST OF DOCS")
 	if threshold and not is_valid_threshold(threshold):
@@ -122,22 +122,22 @@ def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
 
 	return build_response("OK", data)
 
-def find_images_similar_to_doc(primary_image, list_of_docs, threshold=0.5):
+def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 	if threshold != None:
 		threshold = float(threshold)
 
-	if not is_valid_doc(primary_image):
+	if not is_valid_doc(primary_doc):
 		return build_response("FAILED", "INVALID PRIMARY DOC")
-	if not is_valid_list(list_of_docs):
-		return build_response("FAILED", "INVALID LIST OF DOCS")
+	if not is_valid_list(list_of_images):
+		return build_response("FAILED", "INVALID LIST OF IMAGES")
 	if threshold and not is_valid_threshold(threshold):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
 	data = ""
 	if threshold != None:
-		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs, threshold)
+		data = sim_handler.images_similar_to_doc(primary_doc, list_of_images, threshold)
 	else:
-		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs)
+		data = sim_handler.images_similar_to_doc(primary_doc, list_of_images)
 
 	return build_response("OK", data)
 
