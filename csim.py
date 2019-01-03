@@ -110,6 +110,39 @@ class Csim:
 				})
 		return similar_docs
 
+	def cluster_img(self, list_of_images, threshold=0.5):
+		clusters = []
+
+		for index_i in range(len(list_of_images)):
+			for index_j in range(index_i + 1, len(list_of_images)):
+				img1 = list_of_images[index_i]
+				img2 = list_of_images[index_j]
+				score = self.find_sim_between_two_img(img1.get("content"), img2.get("content"))
+				#print (doc1.get("name"), doc2.get("name"), score)
+
+				img1_cluster_id = self.get_cluster_id(clusters, img1.get("name"))
+				img2_cluster_id = self.get_cluster_id(clusters, img2.get("name"))
+
+				#print (doc1_cluster_id, doc2_cluster_id)
+
+				if score > threshold:
+					if img1_cluster_id == None and img2_cluster_id == None:
+						clusters.append([img1.get("name"), img2.get("name")])
+					elif img1_cluster_id == None and img2_cluster_id != None:
+						clusters[img2_cluster_id].append(img1.get("name"))
+					elif img1_cluster_id != None and img2_cluster_id == None:
+						clusters[img1_cluster_id].append(img2.get("name"))
+					else:
+						clusters[img1_cluster_id] += clusters[img2_cluster_id]
+						del clusters[img2_cluster_id]
+				else:
+					if img1_cluster_id == None:
+						clusters.append([img1.get("name")])
+					if img2_cluster_id == None:
+						clusters.append([img2.get("name")])
+
+		return clusters
+
 if __name__ == "__main__":
 	csim = Csim()
 
