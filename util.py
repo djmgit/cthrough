@@ -40,7 +40,13 @@ def is_valid_op(operation):
 		"find_sim_between_two",
 		"find_similar_docs",
 		"find_similar_pairs",
-		"cluster_docs"
+		"cluster_docs",
+		"find_sim_between_two_images",
+		"find_sim_between_image_text",
+		"find_docs_similar_to_image",
+		"find_docs_similar_to_image",
+		"cluster_images"
+
 	]
 
 	if not operation or operation not in valid_ops:
