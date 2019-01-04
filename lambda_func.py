@@ -141,7 +141,7 @@ def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 
 	return build_response("OK", data)
 
-def cluster_docs(list_of_images, threshold=None):
+def cluster_images(list_of_images, threshold=None):
 	if threshold != None:
 		threshold = float(threshold)
 
@@ -169,8 +169,6 @@ def handler(event, context):
 		return find_sim_between_two(event.get("doc1"), event.get("doc2"))
 
 	if operation == "find_similar_docs":
-		#primary_doc = conv_to_obj(event.get("primary_doc"))
-		#list_of_docs = conv_to_obj(event.get("list_of_docs"))
 		return find_similar_docs(event.get("primary_doc"), event.get("list_of_docs"), event.get("threshold"))
 
 	if operation == "find_similar_pairs":
@@ -178,3 +176,18 @@ def handler(event, context):
 
 	if operation == "cluster_docs":
 		return cluster_docs(event.get("list_of_docs"), event.get("threshold"))
+
+	if operation == "find_sim_between_two_images":
+		return find_sim_between_two_images(event.get("img1"), event.get("img2"))
+
+	if operation == "find_sim_between_image_text":
+		return find_sim_between_image_text(event.get("img"), event.get("doc"))
+
+	if operation == "find_docs_similar_to_image":
+		return find_docs_similar_to_image(event.get("primary_image"), event.get("list_of_docs"), event.get("threshold"))
+
+	if operation == "find_docs_similar_to_image":
+		return find_docs_similar_to_image(event.get("primary_doc"), event.get("list_of_images"), event.get("threshold"))
+
+	if operation == "cluster_images":
+		return cluster_images(event.get("list_of_images"), event.get("threshold"))
