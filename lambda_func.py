@@ -5,6 +5,7 @@
 import json
 from csim import Csim
 from util import *
+import base64
 
 sim_handler = Csim()
 
@@ -109,6 +110,7 @@ def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
 
 	if not is_valid_doc(primary_image):
 		return build_response("FAILED", "INVALID PRIMARY IMAGE")
+	primary_image['content'] = base64.b64decode(primary_image.get("content").encode())
 	if not is_valid_list(list_of_docs):
 		return build_response("FAILED", "INVALID LIST OF DOCS")
 	if threshold and not is_valid_threshold(threshold):
@@ -116,9 +118,9 @@ def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
 
 	data = ""
 	if threshold != None:
-		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs, threshold)
+		data = sim_handler.docs_similar_to_img(primary_image, list_of_docs, threshold)
 	else:
-		data = sim_handler.docs_similar_to_img(primary_doc, list_of_docs)
+		data = sim_handler.docs_similar_to_img(primary_image, list_of_docs)
 
 	return build_response("OK", data)
 
@@ -130,6 +132,8 @@ def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 		return build_response("FAILED", "INVALID PRIMARY DOC")
 	if not is_valid_list(list_of_images):
 		return build_response("FAILED", "INVALID LIST OF IMAGES")
+	for image in list_of_images:
+		image['content'] = base64.b64decode(image.get("content").encode())
 	if threshold and not is_valid_threshold(threshold):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
@@ -147,6 +151,8 @@ def cluster_images(list_of_images, threshold=0.5):
 
 	if not is_valid_list(list_of_images):
 		return build_response("FAILED", "INVALID LIST OF DOCS")
+	for image in list_of_images:
+		image['content'] = base64.b64decode(image.get("content").encode())
 	if threshold and not is_valid_threshold(threshold):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
@@ -178,10 +184,10 @@ def handler(event, context):
 		return cluster_docs(event.get("list_of_docs"), event.get("threshold"))
 
 	if operation == "find_sim_between_two_images":
-		return find_sim_between_two_images(event.get("img1"), event.get("img2"))
+		return find_sim_between_two_images(base64.b64decode(event.get("img1").encode()), base64.b64decode(event.get("img2").encode()))
 
 	if operation == "find_sim_between_image_text":
-		return find_sim_between_image_text(event.get("img"), event.get("doc"))
+		return find_sim_between_image_text(base64.b64decode(event.get("img").encode()), event.get("doc"))
 
 	if operation == "find_docs_similar_to_image":
 		return find_docs_similar_to_image(event.get("primary_image"), event.get("list_of_docs"), event.get("threshold"))
