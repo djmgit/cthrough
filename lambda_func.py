@@ -141,7 +141,7 @@ def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 
 	return build_response("OK", data)
 
-def cluster_images(list_of_images, threshold=None):
+def cluster_images(list_of_images, threshold=0.5):
 	if threshold != None:
 		threshold = float(threshold)
 
