@@ -44,7 +44,7 @@ def is_valid_op(operation):
 		"find_sim_between_two_images",
 		"find_sim_between_image_text",
 		"find_docs_similar_to_image",
-		"find_docs_similar_to_image",
+		"find_images_similar_to_doc",
 		"cluster_images"
 
 	]

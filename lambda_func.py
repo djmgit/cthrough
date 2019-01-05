@@ -192,8 +192,8 @@ def handler(event, context):
 	if operation == "find_docs_similar_to_image":
 		return find_docs_similar_to_image(event.get("primary_image"), event.get("list_of_docs"), event.get("threshold"))
 
-	if operation == "find_docs_similar_to_image":
-		return find_docs_similar_to_image(event.get("primary_doc"), event.get("list_of_images"), event.get("threshold"))
+	if operation == "find_images_similar_to_doc":
+		return find_images_similar_to_doc(event.get("primary_doc"), event.get("list_of_images"), event.get("threshold"))
 
 	if operation == "cluster_images":
 		return cluster_images(event.get("list_of_images"), event.get("threshold"))
