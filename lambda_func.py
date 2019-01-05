@@ -63,7 +63,7 @@ def cluster_docs(list_of_docs, threshold=None):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
 	data = ""
-	if threshold:
+	if threshold  != None:
 		data = sim_handler.cluster_docs(list_of_docs, threshold)
 	else:
 		data = sim_handler.cluster_docs(list_of_docs)
@@ -104,7 +104,7 @@ def find_sim_between_image_text(img, doc):
 
 	return response
 
-def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
+def find_docs_similar_to_image(primary_image, list_of_docs, threshold=None):
 	if threshold != None:
 		threshold = float(threshold)
 
@@ -124,7 +124,7 @@ def find_docs_similar_to_image(primary_image, list_of_docs, threshold=0.5):
 
 	return build_response("OK", data)
 
-def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
+def find_images_similar_to_doc(primary_doc, list_of_images, threshold=None):
 	if threshold != None:
 		threshold = float(threshold)
 
@@ -145,7 +145,7 @@ def find_images_similar_to_doc(primary_doc, list_of_images, threshold=0.5):
 
 	return build_response("OK", data)
 
-def cluster_images(list_of_images, threshold=0.5):
+def cluster_images(list_of_images, threshold=None):
 	if threshold != None:
 		threshold = float(threshold)
 
@@ -157,7 +157,7 @@ def cluster_images(list_of_images, threshold=0.5):
 		return build_response("FAILED", "INVALID THRESHOLD")
 
 	data = ""
-	if threshold:
+	if threshold != None:
 		data = sim_handler.cluster_img(list_of_images, threshold)
 	else:
 		data = sim_handler.cluster_img(list_of_images)
