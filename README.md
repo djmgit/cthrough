@@ -38,7 +38,8 @@ The API consists of various endpoints which are described below:
 The base API endpoint us **https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging**
 
 #### /find-sim-between-two
-```POST /find-sim-between-two
+```
+  POST /find-sim-between-two
   Request body:
   {
     "doc1" : 'content of document 1 as string'
