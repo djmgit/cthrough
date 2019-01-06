@@ -137,3 +137,54 @@ Response:
 }
 
 ```
+
+### /find-similar-pairs
+This endpoint finds the similarity score between every pair of documents in the given list
+
+```
+  POST /find-similar-pairs
+  Request body:
+  {"list_of_docs":[
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    .
+    .
+    .
+    .
+    ]
+  }
+```
+**Example in python**
+```
+import requests
+  
+doc1 = {"name":"test1.txt", "content": "I love burgers. Burger king is good for burgers. Whopper is best"}
+doc2 = {"name":"test2.txt", "content": "I love burgers too. Burger king is good but McDonalds is better. It has got lots of options"}
+doc3 = {"name":"test3.txt", "content": "I do not like burgers. I love pizzas. Dominos pizzas are great. I just love them"}
+doc4 = {"name":"test4.txt", "content": "I love cheese burst pizzas. Dominos and smokin joe are great pizza shops."}
+doc5 = {"name":"test5.txt", "content": "I do not like fast food. I like to eat home made food more."}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-similar-pairs"
+data = {
+  "list_of_docs": [
+      doc1,
+      doc2,
+      doc3,
+      doc4,
+      doc5
+    ]
+}
+
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+```
+
+
+
