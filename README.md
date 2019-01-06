@@ -559,6 +559,73 @@ Reponse:
 }
 
 ```
+### /cluster-images
+This is endpoint can be used to separate images into cluster depending on the similary scores among them and the threshold
+value provided.
+
+```
+POST /cluster-images
+{
+    "list_of_images":[
+    {
+      "name": "name of the image",
+      "content": "base64 encoded content of the image"
+    },
+    {
+      "name": "name of the image",
+      "content": "base64 encoded content of the image"
+    },
+    .
+    .
+    .
+    .
+  ],
+  "threshold": "Desired threshold between 0 and 1"
+}
+
+```
+**Example in python**
+
+```
+import requests
+import base64
+
+with open('image1.jpg', 'rb') as image1:
+	img1 = base64.b64encode(image1.read()).decode()
+with open('image2.jpg', 'rb') as image2:
+	img2 = base64.b64encode(image2.read()).decode()
+with open('image3.jpg', 'rb') as image3:
+	img3 = base64.b64encode(image3.read()).decode()
+	
+data = {
+    "list_of_images": [
+    	img1,
+	img2,
+	img3
+    ],
+    "threshold": 0.3
+}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/cluster-images"
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+Response:
+200
+{
+    "status": "OK",
+    "data": [
+        [
+            "img1",
+            "img3"
+        ],
+        [
+            "img2"
+        ]
+    ]
+}
+
+```
 
 
 
