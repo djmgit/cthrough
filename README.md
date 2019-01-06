@@ -418,6 +418,81 @@ Reponse:
 }
 
 ```
+### /find-images-similar-to-doc
+This endpoint can be used  to find images which are most similar to a given document. A threshold must be provided which will be
+used to filter the images based on the similarity score which they obtain with the given text.
+
+```
+POST /find-images-similar-to-doc
+Request body:
+{
+  "primary_doc:{
+    "name": "name of the file",
+    "content": "content of the file"
+  },
+  "list_of_images":[
+    {
+      "name": "name of the image",
+      "content": "content of the image"
+    },
+    {
+      "name": "name of the image",
+      "content": "content of the image"
+    },
+    .
+    .
+    .
+    .
+  ],
+  "threshold": "Desired threshold between 0 and 1"
+}
+
+```
+### Example in python
+```
+import requests
+import base64
+
+doc = {"name": "test6.txt", "content": "A human loves skate boarding. I too have a skateboard at my house. I often use it in my garden while playing."}
+
+with open('image1.jpg', 'rb') as image1:
+	img1 = base64.b64encode(image1.read()).decode()
+with open('image2.jpg', 'rb') as image2:
+	img2 = base64.b64encode(image2.read()).decode()
+with open('image3.txt', 'rb') as image3:
+	img3 = base64.b64encode(image3.read()).decode()
+	
+data = {
+    "primary_doc": doc,
+    "list_of_images": [
+    	img1,
+	img2,
+	img3
+    ]
+}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-images-similar-to-doc"
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+Response
+
+{
+    "status": "OK",
+    "data": [
+        {
+            "name": "img1",
+            "score": 0.48989794855663565
+        },
+        {
+            "name": "img3",
+            "score": 0.48989794855663565
+        }
+    ]
+}
+
+
+```
 
 
 
