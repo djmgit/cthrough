@@ -70,4 +70,111 @@ The base API endpoint us **https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.co
   
 ```
 
+### /find-similar-docs
+This endpoint find docs (from a list of docs) which are most similar to a given doc depending on the given threshold.
+**Threshold must be between 0 and 1**
+```
+POST /find-similar-docs
+request body:
+{
+  "primary_doc:{
+    "name": "name of the file",
+    "content": "content of the file"
+  },
+  "list_of_docs":[
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    .
+    .
+    .
+    .
+  ],
+  "threshold": "Desired threshold between 0 and 1"
+}
+
+Response:
+200
+{
+    "status": "OK",
+    "data": [
+        {
+            "docs": [
+                "test1.txt",
+                "test2.txt"
+            ],
+            "score": 0.6674238124719146
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test3.txt"
+            ],
+            "score": 0.30151134457776363
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test4.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test3.txt"
+            ],
+            "score": 0.21081851067789195
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test4.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test3.txt",
+                "test4.txt"
+            ],
+            "score": 0.6030226891555273
+        },
+        {
+            "docs": [
+                "test3.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test4.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        }
+    ]
+}
+```
+
 
