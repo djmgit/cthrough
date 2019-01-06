@@ -640,6 +640,7 @@ Response:
 - **update_lambda.py**: Update the deployed lambda function, do not forget to change function name.
 - **insdep.sh**: Install dependencies after creating virtualenv
 - **packdep.sh**: Package the entire app, create a bundle zip and deploy it to lambda.
+- **test_api.py**: Test all the APIs
 
 ### Cthrough CLI
 
