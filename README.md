@@ -5,3 +5,11 @@ any two given text documents. Also from a given group of text documents it can f
 a customisable threshold) to a particular given document. Not only can it compare text document with text documen,it can also compare text with image and generate similairty between them. It can also be used to cluster images and texts. Find all the use cases of Cthrough in details below.
 
 ### Technologies used
+- Amazon Comprehend
+- Amazon Rekognition
+- AWS Lambda
+- AWS API Gateway
+- Boto3
+- Python3
+
+
