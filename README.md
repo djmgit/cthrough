@@ -29,4 +29,7 @@ the similarity between two text documents, it first finds out a set of keywords 
 it has go the two lists of keywords, it calculates **Cosine** similarity between them. Cosine similairty is a method of determining similairity between two documents and is based on occurence of words and returns a value between **0 and 1**
 In order to calculate similarity between images, it first extracts entities from the images using **Amazon Rekognition**. Once the
 entities are extracted for both the image, then we again use cosine similarity to determine the similarity between both the images.
-Same methodology is also used for determining similarity between images and textx
+Same methodology is also used for determining similarity between images and texts.
+The core functionalities are deployed as a lambda function which is exposed as a REST API via **Amazon API Gateway**
+
+
