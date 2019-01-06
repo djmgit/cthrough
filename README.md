@@ -22,3 +22,11 @@ a customisable threshold) to a particular given document. Not only can it compar
 - Given an image, from a list of documents, filter all those documents which are most similar to the given image
 - Given a text document, from a list of images, filter all those images which are most similar to the given document
 - Separate given images into clusters.
+
+### How it works
+Cthrough uses **Amazon Comprehend** to find out the entities and keywords resent in a given text document. In order to calculate
+the similarity between two text documents, it first finds out a set of keywords + entities from both the text documents. Once
+it has go the two lists of keywords, it calculates **Cosine** similarity between them. Cosine similairty is a method of determining similairity between two documents and is based on occurence of words and returns a value between **0 and 1**
+In order to calculate similarity between images, it first extracts entities from the images using **Amazon Rekognition**. Once the
+entities are extracted for both the image, then we again use cosine similarity to determine the similarity between both the images.
+Same methodology is also used for determining similarity between images and textx
