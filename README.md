@@ -97,6 +97,32 @@ request body:
   ],
   "threshold": "Desired threshold between 0 and 1"
 }
+```
+**Example in python**
+
+```
+
+import requests
+doc1 = {"name":"test1.txt", "content": "I love burgers. Burger king is good for burgers. Whopper is best"}
+doc2 = {"name":"test2.txt", "content": "I love burgers too. Burger king is good but McDonalds is better. It has got lots of options"}
+doc3 = {"name":"test3.txt", "content": "I do not like burgers. I love pizzas. Dominos pizzas are great. I just love them"}
+doc4 = {"name":"test4.txt", "content": "I love cheese burst pizzas. Dominos and smokin joe are great pizza shops."}
+
+data = {
+  "primary_doc": doc1,
+  "list_of_docs": [
+    doc2,
+    doc3,
+    doc4,
+    doc5
+  ],
+  "threshold": 0.4
+}
+
+url = 'https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-similar-docs'
+
+response = requests.request("POST", url, json=data)
+print (response.json())
 
 Response:
 200
@@ -104,77 +130,10 @@ Response:
     "status": "OK",
     "data": [
         {
-            "docs": [
-                "test1.txt",
-                "test2.txt"
-            ],
+            "name": "test2.txt",
             "score": 0.6674238124719146
-        },
-        {
-            "docs": [
-                "test1.txt",
-                "test3.txt"
-            ],
-            "score": 0.30151134457776363
-        },
-        {
-            "docs": [
-                "test1.txt",
-                "test4.txt"
-            ],
-            "score": 0.0
-        },
-        {
-            "docs": [
-                "test1.txt",
-                "test5.txt"
-            ],
-            "score": 0.0
-        },
-        {
-            "docs": [
-                "test2.txt",
-                "test3.txt"
-            ],
-            "score": 0.21081851067789195
-        },
-        {
-            "docs": [
-                "test2.txt",
-                "test4.txt"
-            ],
-            "score": 0.0
-        },
-        {
-            "docs": [
-                "test2.txt",
-                "test5.txt"
-            ],
-            "score": 0.0
-        },
-        {
-            "docs": [
-                "test3.txt",
-                "test4.txt"
-            ],
-            "score": 0.6030226891555273
-        },
-        {
-            "docs": [
-                "test3.txt",
-                "test5.txt"
-            ],
-            "score": 0.0
-        },
-        {
-            "docs": [
-                "test4.txt",
-                "test5.txt"
-            ],
-            "score": 0.0
         }
     ]
 }
+
 ```
-
-
