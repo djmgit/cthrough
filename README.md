@@ -433,11 +433,11 @@ Request body:
   "list_of_images":[
     {
       "name": "name of the image",
-      "content": "content of the image"
+      "content": "base64 encoded content of the image"
     },
     {
       "name": "name of the image",
-      "content": "content of the image"
+      "content": "base64 encoded content of the image"
     },
     .
     .
@@ -448,7 +448,7 @@ Request body:
 }
 
 ```
-### Example in python
+**Example in python**
 ```
 import requests
 import base64
@@ -468,7 +468,8 @@ data = {
     	img1,
 	img2,
 	img3
-    ]
+    ],
+    "threshold": 0.3
 }
 
 url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-images-similar-to-doc"
@@ -491,8 +492,74 @@ Response
     ]
 }
 
+```
+### /find-docs-similar-to-image
+This api can be used to ind the documents which are most similar to a given image. A threshold must be provided based on which
+the images will be filtered.
 
 ```
+POST /find-docs-similar-to-image
+Request body:
+{
+  "primary_image:{
+    "name": "name of the image",
+    "content": "base64 encoded image string"
+  },
+  "list_of_docs":[
+    {
+      "name": "name of the doc",
+      "content": "content of the doc"
+    },
+    {
+      "name": "name of the doc",
+      "content": "content of the doc"
+    },
+    .
+    .
+    .
+    .
+  ],
+  "threshold": "Desired threshold between 0 and 1"
+}
+
+```
+**Example in python**
+```
+import request
+import base64
+
+with open('image.png', 'rb') as image:
+	img = base64.b64encode(image.read()).decode()
+doc6 = {"name": "test6.txt", "content": "A human loves skate boarding. I too have a skateboard at my house. I often use it in my garden while playing."}
+doc7 = {"name": "test7.txt", "content": "i love burgers very much."}
+
+data = {
+    "primary_image": img,
+    "list_of_docs": [
+        doc6,
+	doc7
+    ],
+    "threshold": 0.3
+}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-docs-similar-to-image"
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+Reponse:
+200
+{
+    "status": "OK",
+    "data": [
+        {
+            "name": "test6.txt",
+            "score": 0.48989794855663565
+        }
+    ]
+}
+
+```
+
 
 
 
