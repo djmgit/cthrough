@@ -186,5 +186,78 @@ print (response.json())
 
 ```
 
+### /cluster-docs
+This endpint can be used to separae a given list of documents into clusters of similar documents. A threshold is required,
+based on which the clustering is done.
+
+```
+POST /cluster-docs
+Request body:
+{
+  "list_of_docs":[
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    {
+      "name": "name of the file",
+      "content": "content of the file"
+    },
+    .
+    .
+    .
+    .
+  ],
+  "threshold": "Desired threshold between 0 and 1"
+}
+```
+**Example in python**
+```
+
+import requests
+  
+doc1 = {"name":"test1.txt", "content": "I love burgers. Burger king is good for burgers. Whopper is best"}
+doc2 = {"name":"test2.txt", "content": "I love burgers too. Burger king is good but McDonalds is better. It has got lots of options"}
+doc3 = {"name":"test3.txt", "content": "I do not like burgers. I love pizzas. Dominos pizzas are great. I just love them"}
+doc4 = {"name":"test4.txt", "content": "I love cheese burst pizzas. Dominos and smokin joe are great pizza shops."}
+doc5 = {"name":"test5.txt", "content": "I do not like fast food. I like to eat home made food more."}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/cluster-docs"
+
+data = {
+  "list_of_docs": [
+      doc1,
+      doc2,
+      doc3,
+      doc4,
+      doc5
+    ],
+    "threshold": 0.4
+}
+
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+response:
+200
+{
+    "status": "OK",
+    "data": [
+        [
+            "test1.txt",
+            "test2.txt"
+        ],
+        [
+            "test3.txt",
+            "test4.txt"
+        ],
+        [
+            "test5.txt"
+        ]
+    ]
+}
+
+```
+
 
 
