@@ -55,5 +55,19 @@ The base API endpoint us **https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.co
 }
 
 ```
+**Example in python**
+```
+  import requests
+  doc1 = "I love burgers. Burger king is good for burgers. Whopper is best"
+  doc2 = "I love burgers too. Burger king is good but McDonalds is better. It has got lots of options"
+  url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-sim-between-two"
+  data = {
+    "doc1": doc1,
+    "dco2": doc2
+  }
+  response = requests.request("POST", url, json=data)
+  print (response.json())
+  
+```
 
 
