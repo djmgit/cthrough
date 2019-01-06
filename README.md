@@ -367,6 +367,55 @@ url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-sim-b
 response = requests.request("POST", url, json=data)
 print (response.json())
 
+Response:
+
+200
+{
+    "status": "OK",
+    "data": {
+        "score": 0.21773242158072692
+    }
+}
+
+```
+### /find-sim-between-image-text
+This endpoint can be used to determine similarity between an image and a text document.
+
+```
+POST /find-sim-between-image-text
+Request body:
+{
+    "img": "base64 encoded image string",
+    "doc": "document content"
+}
+```
+
+**Example in python**
+```
+import requests
+import base64
+
+with open('image1.jpg', 'rb') as image1:
+	img1 = base64.b64encode(image1.read()).decode()
+doc = "A human loves skate boarding. I too have a skateboard at my house. I often use it in my garden while playing."
+
+data = {
+  "img1": img1,
+  "doc": doc
+}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-sim-between-image-text"
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+Reponse:
+200
+{
+    "status": "OK",
+    "data": {
+        "score": 0.3794733192202055
+    }
+}
 
 ```
 
