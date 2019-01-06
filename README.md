@@ -335,6 +335,40 @@ response:
 }
 
 ```
+### /find-sim-between-two-images
+This endpoint can be used to determine similarity between two images. It is to be notes that, images should be sent as
+base64 encoded strings. Please follow the below given example to know how to make a request in python.
+
+```
+  POST /find-sim-between-two-images
+  Request body:
+  {
+    "img1": "base64 encoded image string",/find-sim-between-two-images
+    "img2": base64 encoded image string
+  }
+  
+```
+**Example in python**
+```
+import requests
+import base64
+
+with open('image1.jpg', 'rb') as image1:
+	img1 = base64.b64encode(image1.read()).decode()
+with open('image2.jpg', 'rb') as image2:
+	img2 = base64.b64encode(image2.read()).decode()
+
+data = {
+  "img1": img1,
+  "img2": img2
+}
+
+url = "https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging/find-sim-between-two-images"
+response = requests.request("POST", url, json=data)
+print (response.json())
+
+
+```
 
 
 
