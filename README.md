@@ -4,6 +4,8 @@ Cthrough is a web based API to calculate similarity between text documents. It c
 any two given text documents. Also from a given group of text documents it can find documenst which are most similar (depending on
 a customisable threshold) to a particular given document. Not only can it compare text document with text documen,it can also compare text with image and generate similairty between them. It can also be used to cluster images and texts. Find all the use cases of Cthrough in details below.
 
+Cthrough also comes with a CLI tool : https://github.com/djmgit/cthrough_cli
+
 ### Technologies used
 - Amazon Comprehend
 - Amazon Rekognition
