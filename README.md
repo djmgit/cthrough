@@ -32,4 +32,27 @@ entities are extracted for both the image, then we again use cosine similarity t
 Same methodology is also used for determining similarity between images and texts.
 The core functionalities are deployed as a lambda function which is exposed as a REST API via **Amazon API Gateway**
 
+### API Usage
+The API consists of various endpoints which are described below:
+
+The base API endpoint us **https://nwqhr5fk8c.execute-api.us-east-1.amazonaws.com/staging**
+
+#### /find-sim-between-two
+```POST /find-sim-between-two
+  Request body:
+  {
+    "doc1" : 'content of document 1 as string'
+    "doc2" : 'content of document 2 as string'
+  }
+  
+  Response:
+  {
+    "status": "OK",
+    "data": {
+        "score": 0.6674238124719146
+    }
+}
+
+```
+
 
