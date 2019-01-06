@@ -184,6 +184,83 @@ data = {
 response = requests.request("POST", url, json=data)
 print (response.json())
 
+200
+{
+    "status": "OK",
+    "data": [
+        {
+            "docs": [
+                "test1.txt",
+                "test2.txt"
+            ],
+            "score": 0.6674238124719146
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test3.txt"
+            ],
+            "score": 0.30151134457776363
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test4.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test1.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test3.txt"
+            ],
+            "score": 0.21081851067789195
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test4.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test2.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test3.txt",
+                "test4.txt"
+            ],
+            "score": 0.6030226891555273
+        },
+        {
+            "docs": [
+                "test3.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        },
+        {
+            "docs": [
+                "test4.txt",
+                "test5.txt"
+            ],
+            "score": 0.0
+        }
+    ]
+}
+
 ```
 
 ### /cluster-docs
