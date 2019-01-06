@@ -629,6 +629,18 @@ Response:
 
 ```
 
+### Source code structure
+
+- **knowledge_extractor.py**: Extracts entities and keywords from text using Amazon comprehend
+- **imageinfo_extractor.py**: Extracts entities from image
+- **simib.py**: Core module which implements cosine similarity using above two modules.
+- **csim.py**: Uses simlib.py to implement features like determining similarity between texts and images and clustering.
+- **lambda_func.py**: Lambda handler and handler functions for individual operations
+- **main.py**: A test flask application for bare-metal deployment
+- **update_lambda.py**: Update the deployed lambda function, do not forget to change function name.
+- **insdep.sh**: Install dependencies after creating virtualenv
+- **packdep.sh**: Package the entire app, create a bundle zip and deploy it to lambda.
+
 ### Cthrough CLI
 
 Cthrough API can also be accessed over a python based CLI tool - https://github.com/djmgit/cthrough_cli
